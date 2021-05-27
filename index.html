@@ -263,7 +263,7 @@
 							<g id="Share-button" sketch:type="MSLayerGroup"
 								transform="translate(95.000000, 565.000000)">
 								<a style="cursor:pointer;" class="popup"
-									onclick="window.open('')">
+									onclick="myFunction()">
 									<polygon id="Score-hex-2" fill="#3498DB" sketch:type="MSShapeGroup"
 										transform="translate(127.661316, 32.500000) rotate(-90.000000) translate(-127.661316, -32.500000) "
 										points="127.661316 -94.814636 160.137269 -76.064636 160.137269 141.064636 127.661317 159.814636 95.185364 141.064636 95.1853635 -76.064636 ">
@@ -296,9 +296,31 @@
 		</div>
 	</div>
 	<script type="text/javascript">
+
 		function myFunction() {
-			alert(localStorage.getItem('123456789'))
-			alert(document.getElementById("cScore").innerHTML)
+
+			var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+
+var raw = JSON.stringify({
+  "id": localStorage.setItem('id'),
+  "score": document.getElementById("cScore").innerHTML
+});
+
+var requestOptions = {
+  method: 'PATCH',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://freebbies.herokuapp.com/user/updatecoins", requestOptions)
+  .then(response => response.text())
+  .then(result => {
+	  alert('Score added resatrt game')
+  })
+  .catch(error => console.log('error', error));
+
 		}
 		(function addRussianSocialShare() {
 			var lang = navigator.language || navigator.userLanguage;
