@@ -298,12 +298,12 @@
 	<script type="text/javascript">
 
 		function myFunction() {
-
+alert('scroe')
 			var myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/json");
 
 var raw = JSON.stringify({
-  "id": localStorage.setItem('id'),
+  "id": localStorage.getItem('id'),
   "score": document.getElementById("cScore").innerHTML
 });
 
